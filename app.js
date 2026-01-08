@@ -8,9 +8,11 @@ const summaryDiv = document.getElementById('summary');
 const tierResultsDiv = document.getElementById('tierResults');
 const tiersConfigDiv = document.getElementById('tiersConfig');
 const addTierBtn = document.getElementById('addTierBtn');
+const exportBtn = document.getElementById('exportBtn');
 
 // State
 let csvData = null;
+let lastResults = null;
 
 // Default tiers
 const defaultTiers = [
@@ -44,6 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
 fileInput.addEventListener('change', handleFileSelect);
 analyzeBtn.addEventListener('click', analyzeData);
 addTierBtn.addEventListener('click', () => addTierRow('', 0));
+exportBtn.addEventListener('click', exportResults);
 
 // Drag and drop
 uploadArea.addEventListener('dragover', (e) => {
@@ -365,6 +368,9 @@ function getTierColor(index) {
 }
 
 function displayResults(tierGroups, tiers, summary) {
+    // Store results for export
+    lastResults = { tierGroups, tiers, summary };
+
     resultsSection.hidden = false;
 
     // Summary
@@ -438,6 +444,71 @@ function displayResults(tierGroups, tiers, summary) {
 
     // Scroll to results
     resultsSection.scrollIntoView({ behavior: 'smooth' });
+}
+
+function exportResults() {
+    if (!lastResults) return;
+
+    const { tierGroups, tiers, summary } = lastResults;
+    const lines = [];
+
+    // Header
+    lines.push('DONOR TIER SEGMENTATION REPORT');
+    lines.push('='.repeat(50));
+    lines.push(`Generated: ${new Date().toLocaleString()}`);
+    lines.push(`Time Period: ${summary.monthsBack} months`);
+    lines.push('');
+
+    // Summary
+    lines.push('SUMMARY');
+    lines.push('-'.repeat(30));
+    lines.push(`Total Donors: ${summary.totalDonors}`);
+    lines.push(`Total Transactions: ${summary.transactionsInPeriod}`);
+    lines.push(`Total Donated: ${formatCurrency(summary.totalDonations)}`);
+    lines.push('');
+
+    // Tier breakdown
+    const tierOrder = [...tiers.map(t => t.name), 'Other'];
+    tierOrder.forEach(tierName => {
+        const group = tierGroups[tierName];
+        if (!group) return;
+
+        lines.push('');
+        lines.push(`${group.name.toUpperCase()}${group.min > 0 ? ` (${formatCurrency(group.min)}+)` : ''}`);
+        lines.push('-'.repeat(30));
+        lines.push(`Donors: ${group.donors.length} | Total: ${formatCurrency(group.total)}`);
+        lines.push('');
+
+        if (group.donors.length > 0) {
+            // Column headers
+            lines.push('Name                                    Email                                   Total           #');
+            lines.push('-'.repeat(100));
+
+            group.donors.forEach(d => {
+                const name = d.name.substring(0, 38).padEnd(40);
+                const email = d.email.substring(0, 38).padEnd(40);
+                const total = formatCurrency(d.total).padStart(12);
+                const count = d.transactions.toString().padStart(4);
+                lines.push(`${name}${email}${total}${count}`);
+            });
+        } else {
+            lines.push('No donors in this tier');
+        }
+        lines.push('');
+    });
+
+    // Create and download file
+    const content = lines.join('\n');
+    const blob = new Blob([content], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `donor-tiers-${new Date().toISOString().split('T')[0]}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
 }
 
 function escapeHtml(text) {
