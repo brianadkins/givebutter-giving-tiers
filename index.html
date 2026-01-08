@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donor Tier Segmentation</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Donor Tier Segmentation</h1>
+            <p>Upload a Givebutter CSV export to segment donors by giving level</p>
+        </header>
+
+        <section class="config-section">
+            <div class="config-group">
+                <h2>Configuration</h2>
+
+                <div class="config-row">
+                    <label for="monthsBack">Time Period (months):</label>
+                    <input type="number" id="monthsBack" value="12" min="1" max="120">
+                </div>
+
+                <h3>Tier Thresholds (minimum amount)</h3>
+                <div class="tiers-config" id="tiersConfig"></div>
+                <button type="button" class="add-tier-btn" id="addTierBtn">+ Add Tier</button>
+            </div>
+
+            <div class="upload-group">
+                <h2>Upload CSV</h2>
+                <div class="upload-area" id="uploadArea">
+                    <input type="file" id="fileInput" accept=".csv" hidden>
+                    <label for="fileInput" class="upload-label">
+                        <span class="upload-icon">📁</span>
+                        <span>Click to select CSV file</span>
+                        <span class="upload-hint">or drag and drop</span>
+                    </label>
+                </div>
+                <p id="fileName" class="file-name"></p>
+                <button id="analyzeBtn" class="analyze-btn" disabled>Analyze Donations</button>
+            </div>
+        </section>
+
+        <section id="results" class="results-section" hidden>
+            <h2>Results</h2>
+
+            <div id="summary" class="summary"></div>
+
+            <div id="tierResults" class="tier-results"></div>
+        </section>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
