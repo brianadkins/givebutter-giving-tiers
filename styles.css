@@ -326,13 +326,101 @@ header p {
     color: #555;
 }
 
-.tier-body tr:hover {
+.tier-body tr.donor-row:hover {
     background-color: #f8f9fa;
 }
 
 .tier-body .amount {
     font-weight: 500;
     color: #27ae60;
+}
+
+/* Expandable donor rows */
+.donor-row.expandable {
+    cursor: pointer;
+}
+
+.donor-row.expandable:hover {
+    background-color: #e8f4fc;
+}
+
+.expand-icon {
+    display: inline-block;
+    width: 1em;
+    margin-right: 0.5rem;
+    font-size: 0.75rem;
+    color: #666;
+    transition: transform 0.2s;
+}
+
+.expand-icon-placeholder {
+    display: inline-block;
+    width: 1em;
+    margin-right: 0.5rem;
+}
+
+.donor-row.expanded {
+    background-color: #e8f4fc;
+}
+
+.donation-details-container {
+    background-color: #f8fafc;
+}
+
+.donation-details-container > td {
+    padding: 0 !important;
+    border-bottom: 2px solid #ddd;
+}
+
+.donation-details-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+}
+
+.donation-details-table tr.donation-detail {
+    background-color: #f8fafc;
+}
+
+.donation-details-table tr.donation-detail:hover {
+    background-color: #f0f4f8;
+}
+
+.donation-details-table td {
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.donation-details-table .detail-name {
+    padding-left: 2rem;
+    color: #555;
+}
+
+.donation-details-table .detail-contact-id {
+    color: #888;
+    font-size: 0.85rem;
+    font-family: monospace;
+}
+
+.donation-details-table .detail-email {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.tier-body .contact-id {
+    color: #888;
+    font-size: 0.85rem;
+    font-family: monospace;
+}
+
+.donation-details-table .detail-amount {
+    color: #27ae60;
+    font-weight: 500;
+}
+
+.donation-details-table .detail-date {
+    color: #666;
+    font-size: 0.9rem;
 }
 
 .tier-empty {
@@ -358,4 +446,278 @@ header p {
 
 .tier-card.collapsed .tier-body {
     display: none;
+}
+
+/* Merge Selection */
+.donor-checkbox {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #3498db;
+}
+
+.donor-row.selected {
+    background-color: #e3f2fd !important;
+}
+
+.donor-row.selected td:first-child {
+    position: relative;
+}
+
+.donor-row.selected td:first-child::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background-color: #3498db;
+}
+
+/* Merge Toolbar */
+.merge-toolbar {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    background: white;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    z-index: 1000;
+    border: 2px solid #3498db;
+}
+
+.merge-toolbar #mergeCount {
+    font-weight: 500;
+    color: #333;
+}
+
+.merge-btn {
+    padding: 0.6rem 1.2rem;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.merge-btn:hover {
+    background-color: #2980b9;
+}
+
+.cancel-merge-btn {
+    padding: 0.6rem 1rem;
+    background: none;
+    color: #666;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: background-color 0.2s;
+}
+
+.cancel-merge-btn:hover {
+    background-color: #f0f0f0;
+}
+
+.unmerge-btn {
+    padding: 0.6rem 1.2rem;
+    background-color: #e67e22;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+.unmerge-btn:hover {
+    background-color: #d35400;
+}
+
+/* Merged donor indicator */
+.merged-indicator {
+    display: inline-block;
+    background: #3498db;
+    color: white;
+    font-size: 0.7rem;
+    padding: 0.15rem 0.4rem;
+    border-radius: 3px;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+}
+
+.contact-ids-list {
+    font-size: 0.8rem;
+    color: #666;
+}
+
+/* Checkbox column */
+.tier-body th:first-child,
+.tier-body td:first-child {
+    width: 40px;
+    text-align: center;
+}
+
+/* Help Button */
+.help-btn {
+    margin-top: 1rem;
+    padding: 0.5rem 1.25rem;
+    background-color: #9b59b6;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background-color 0.2s, transform 0.2s;
+}
+
+.help-btn:hover {
+    background-color: #8e44ad;
+    transform: scale(1.02);
+}
+
+/* Modal */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.modal[hidden] {
+    display: none;
+}
+
+.modal-content {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    max-width: 600px;
+    max-height: 85vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h2 {
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
+.modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #999;
+    cursor: pointer;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.modal-close:hover {
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.help-section {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.help-section:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.help-section h3 {
+    color: #3498db;
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+}
+
+.help-section p {
+    color: #555;
+    margin-bottom: 0.5rem;
+}
+
+.help-section ol, .help-section ul {
+    margin-left: 1.5rem;
+    color: #555;
+}
+
+.help-section li {
+    margin-bottom: 0.4rem;
+}
+
+.help-section strong {
+    color: #333;
+}
+
+.privacy-notice {
+    background: #e8f8f0;
+    border-radius: 8px;
+    padding: 1rem 1.25rem !important;
+    border: 1px solid #27ae60;
+    border-bottom: 1px solid #27ae60 !important;
+}
+
+.privacy-notice h3 {
+    color: #27ae60 !important;
+}
+
+.privacy-notice p:first-of-type {
+    color: #27ae60;
+    font-size: 1.05rem;
+}
+
+/* Button Row */
+.button-row {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.button-row .analyze-btn {
+    margin-top: 0;
+    flex: 1;
+}
+
+.sample-data-btn {
+    padding: 0.75rem 1rem;
+    background-color: #f0f0f0;
+    color: #555;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s;
+    white-space: nowrap;
+}
+
+.sample-data-btn:hover {
+    background-color: #e8e8e8;
+    border-color: #999;
 }

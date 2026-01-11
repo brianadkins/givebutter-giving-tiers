@@ -11,7 +11,65 @@
         <header>
             <h1>Donor Tier Segmentation</h1>
             <p>Upload a Givebutter CSV export to segment donors by giving level</p>
+            <button id="helpBtn" class="help-btn">How This Works</button>
         </header>
+
+        <!-- Help Modal -->
+        <div id="helpModal" class="modal" hidden>
+            <div class="modal-content">
+                <button class="modal-close" id="closeModal">&times;</button>
+                <h2>How This Works</h2>
+
+                <div class="help-section">
+                    <h3>Step 1: Export Your Data from Givebutter</h3>
+                    <ol>
+                        <li>Log into your <strong>Givebutter</strong> account</li>
+                        <li>Go to <strong>Transactions</strong> in the menu</li>
+                        <li>Click the <strong>Export</strong> button (usually in the top right)</li>
+                        <li>Choose <strong>CSV</strong> format and download the file</li>
+                    </ol>
+                </div>
+
+                <div class="help-section">
+                    <h3>Step 2: Upload and Analyze</h3>
+                    <ol>
+                        <li>Click the upload area above (or drag your file onto it)</li>
+                        <li>Select the CSV file you just downloaded</li>
+                        <li>Adjust the time period if needed (default is 12 months)</li>
+                        <li>Click <strong>"Analyze Donations"</strong></li>
+                    </ol>
+                </div>
+
+                <div class="help-section">
+                    <h3>Step 3: Review Your Donor Tiers</h3>
+                    <p>Your donors will be grouped by how much they've given:</p>
+                    <ul>
+                        <li><strong>Platinum</strong> - Your biggest supporters ($2,500+)</li>
+                        <li><strong>Gold</strong> - Major donors ($1,000+)</li>
+                        <li><strong>Silver</strong> - Generous givers ($500+)</li>
+                        <li><strong>Bronze</strong> - Regular supporters ($250+)</li>
+                        <li><strong>Friend</strong> - All other donors ($50+)</li>
+                    </ul>
+                    <p>You can customize these tier names and amounts!</p>
+                </div>
+
+                <div class="help-section">
+                    <h3>Merging Duplicate Donors</h3>
+                    <p>Sometimes the same person appears twice with different Contact IDs. To combine them:</p>
+                    <ol>
+                        <li>Check the boxes next to the donors you want to merge</li>
+                        <li>Click the <strong>"Merge Selected Donors"</strong> button that appears</li>
+                        <li>Their donations will be combined into one total</li>
+                    </ol>
+                </div>
+
+                <div class="help-section privacy-notice">
+                    <h3>Your Data Stays Private</h3>
+                    <p><strong>Your donor information never leaves your computer.</strong></p>
+                    <p>This tool runs entirely in your web browser. When you upload a file, it's processed right here on your computer - nothing is sent to the internet or stored on any server. When you close this page, the data is gone.</p>
+                </div>
+            </div>
+        </div>
 
         <section class="config-section">
             <div class="config-group">
@@ -38,7 +96,10 @@
                     </label>
                 </div>
                 <p id="fileName" class="file-name"></p>
-                <button id="analyzeBtn" class="analyze-btn" disabled>Analyze Donations</button>
+                <div class="button-row">
+                    <button id="analyzeBtn" class="analyze-btn" disabled>Analyze Donations</button>
+                    <button id="sampleDataBtn" class="sample-data-btn">Load Sample Data</button>
+                </div>
             </div>
         </section>
 
@@ -52,6 +113,13 @@
 
             <div id="tierResults" class="tier-results"></div>
         </section>
+
+        <div id="mergeToolbar" class="merge-toolbar" hidden>
+            <span id="mergeCount">0 selected</span>
+            <button id="mergeBtn" class="merge-btn">Merge Selected Donors</button>
+            <button id="unmergeBtn" class="unmerge-btn" hidden>Unmerge Selected</button>
+            <button id="cancelMergeBtn" class="cancel-merge-btn">Cancel</button>
+        </div>
     </div>
 
     <script src="app.js"></script>
