@@ -68,12 +68,18 @@ This tool runs entirely in your web browser using client-side JavaScript. When y
 The **Load Sample Data** button loads fake donor data for demonstration purposes. This sample data:
 
 - Was generated with fictional names, emails, and donation amounts
-- Includes 22 unique donors across all giving tiers
-- Features some donors with multiple donations (to demonstrate the expand feature)
-- Includes one anonymous donor entry
-- All dates are within the past 12 months
+- Spans 3 years (2023-2025) with 30 unique donors and 79 total transactions
+- Shows realistic giving patterns:
+  - Annual repeat donors (giving around the same time each year)
+  - Growing donors (increasing their gifts over time)
+  - Consistent donors (same amount each year)
+  - One-time donors from earlier years
+- Includes one anonymous donor giving $5,000 annually
+- Features a mix of individuals and organizations
 
 The sample data is embedded directly in the JavaScript code (`app.js`) and does not represent real people or organizations.
+
+**Tip:** Try changing the "Time Period" setting to see how donors move between tiers based on the timeframe analyzed (12 months vs 36 months shows very different totals).
 
 ## Technical Details
 

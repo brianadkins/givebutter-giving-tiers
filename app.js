@@ -809,37 +809,89 @@ function escapeHtml(text) {
 }
 
 function loadSampleData() {
-    // Sample data with fake donors for demonstration
+    // Sample data with fake donors spanning 3 years for demonstration
     const sampleCSV = `Contact ID,First Name,Last Name,Public Name,Email,Contact Email,Company,Donated,Transaction Date (UTC),Status Friendly
 10001,Sarah,Johnson,Sarah J,sarah.johnson@email.com,sarah.johnson@email.com,Johnson Family Foundation,"$3,500.00",2025-09-15,Succeeded
+10001,Sarah,Johnson,Sarah J,sarah.johnson@email.com,sarah.johnson@email.com,Johnson Family Foundation,"$3,000.00",2024-09-10,Succeeded
+10001,Sarah,Johnson,Sarah J,sarah.johnson@email.com,sarah.johnson@email.com,Johnson Family Foundation,"$2,500.00",2023-09-08,Succeeded
 10002,Michael,Chen,Mike Chen,mchen@techcorp.com,mchen@techcorp.com,TechCorp Inc,"$2,800.00",2025-10-22,Succeeded
+10002,Michael,Chen,Mike Chen,mchen@techcorp.com,mchen@techcorp.com,TechCorp Inc,"$2,500.00",2024-10-18,Succeeded
+10002,Michael,Chen,Mike Chen,mchen@techcorp.com,mchen@techcorp.com,TechCorp Inc,"$2,000.00",2023-10-20,Succeeded
 10003,Emily,Rodriguez,Emily R,emily.r@gmail.com,emily.r@gmail.com,,"$1,500.00",2025-08-03,Succeeded
 10003,Emily,Rodriguez,Emily R,emily.r@gmail.com,emily.r@gmail.com,,"$750.00",2025-11-18,Succeeded
+10003,Emily,Rodriguez,Emily R,emily.r@gmail.com,emily.r@gmail.com,,"$1,200.00",2024-08-15,Succeeded
+10003,Emily,Rodriguez,Emily R,emily.r@gmail.com,emily.r@gmail.com,,"$800.00",2023-12-20,Succeeded
 10004,David,Thompson,David T,david.t@outlook.com,david.t@outlook.com,Thompson & Associates,"$1,200.00",2025-07-28,Succeeded
+10004,David,Thompson,David T,david.t@outlook.com,david.t@outlook.com,Thompson & Associates,"$1,000.00",2024-07-15,Succeeded
+10004,David,Thompson,David T,david.t@outlook.com,david.t@outlook.com,Thompson & Associates,"$1,000.00",2023-07-22,Succeeded
 10005,Jennifer,Williams,Jen Williams,jwilliams@school.edu,jwilliams@school.edu,Lincoln Elementary,"$850.00",2025-09-05,Succeeded
 10005,Jennifer,Williams,Jen Williams,jwilliams@school.edu,jwilliams@school.edu,Lincoln Elementary,"$350.00",2025-12-01,Succeeded
+10005,Jennifer,Williams,Jen Williams,jwilliams@school.edu,jwilliams@school.edu,Lincoln Elementary,"$500.00",2024-09-12,Succeeded
+10005,Jennifer,Williams,Jen Williams,jwilliams@school.edu,jwilliams@school.edu,Lincoln Elementary,"$400.00",2023-09-18,Succeeded
 10006,Robert,Garcia,Bob Garcia,rgarcia@email.com,rgarcia@email.com,,"$600.00",2025-10-10,Succeeded
+10006,Robert,Garcia,Bob Garcia,rgarcia@email.com,rgarcia@email.com,,"$500.00",2024-10-05,Succeeded
+10006,Robert,Garcia,Bob Garcia,rgarcia@email.com,rgarcia@email.com,,"$400.00",2023-10-12,Succeeded
 10007,Amanda,Lee,Amanda L,alee@nonprofit.org,alee@nonprofit.org,Community Helpers,"$500.00",2025-08-22,Succeeded
+10007,Amanda,Lee,Amanda L,alee@nonprofit.org,alee@nonprofit.org,Community Helpers,"$500.00",2024-08-20,Succeeded
+10007,Amanda,Lee,Amanda L,alee@nonprofit.org,alee@nonprofit.org,Community Helpers,"$500.00",2023-08-25,Succeeded
 10008,Christopher,Brown,Chris B,cbrown@company.com,cbrown@company.com,Brown Industries,"$450.00",2025-11-05,Succeeded
+10008,Christopher,Brown,Chris B,cbrown@company.com,cbrown@company.com,Brown Industries,"$400.00",2024-11-10,Succeeded
 10009,Jessica,Martinez,Jess M,jmartinez@email.com,jmartinez@email.com,,"$350.00",2025-09-30,Succeeded
+10009,Jessica,Martinez,Jess M,jmartinez@email.com,jmartinez@email.com,,"$300.00",2024-09-28,Succeeded
+10009,Jessica,Martinez,Jess M,jmartinez@email.com,jmartinez@email.com,,"$250.00",2023-09-25,Succeeded
 10010,Daniel,Wilson,Dan Wilson,dwilson@email.com,dwilson@email.com,Wilson Family,"$300.00",2025-10-15,Succeeded
 10010,Daniel,Wilson,Dan Wilson,dwilson@email.com,dwilson@email.com,Wilson Family,"$150.00",2025-12-20,Succeeded
+10010,Daniel,Wilson,Dan Wilson,dwilson@email.com,dwilson@email.com,Wilson Family,"$250.00",2024-10-18,Succeeded
+10010,Daniel,Wilson,Dan Wilson,dwilson@email.com,dwilson@email.com,Wilson Family,"$200.00",2023-10-22,Succeeded
 10011,Michelle,Taylor,Michelle T,mtaylor@school.edu,mtaylor@school.edu,Oak Street School,"$275.00",2025-08-18,Succeeded
+10011,Michelle,Taylor,Michelle T,mtaylor@school.edu,mtaylor@school.edu,Oak Street School,"$250.00",2024-08-22,Succeeded
+10011,Michelle,Taylor,Michelle T,mtaylor@school.edu,mtaylor@school.edu,Oak Street School,"$200.00",2023-08-15,Succeeded
 10012,Kevin,Anderson,Kevin A,kanderson@email.com,kanderson@email.com,,"$250.00",2025-11-12,Succeeded
+10012,Kevin,Anderson,Kevin A,kanderson@email.com,kanderson@email.com,,"$200.00",2024-11-08,Succeeded
 10013,Laura,Thomas,Laura T,lthomas@email.com,lthomas@email.com,,"$200.00",2025-09-08,Succeeded
+10013,Laura,Thomas,Laura T,lthomas@email.com,lthomas@email.com,,"$150.00",2024-09-12,Succeeded
+10013,Laura,Thomas,Laura T,lthomas@email.com,lthomas@email.com,,"$100.00",2023-09-05,Succeeded
 10014,Brian,Jackson,Brian J,bjackson@company.com,bjackson@company.com,Jackson LLC,"$175.00",2025-10-25,Succeeded
+10014,Brian,Jackson,Brian J,bjackson@company.com,bjackson@company.com,Jackson LLC,"$150.00",2024-10-28,Succeeded
 10015,Nicole,White,Nicole W,nwhite@email.com,nwhite@email.com,,"$150.00",2025-07-15,Succeeded
+10015,Nicole,White,Nicole W,nwhite@email.com,nwhite@email.com,,"$100.00",2024-07-20,Succeeded
+10015,Nicole,White,Nicole W,nwhite@email.com,nwhite@email.com,,"$100.00",2023-07-18,Succeeded
 10016,Steven,Harris,Steve H,sharris@email.com,sharris@email.com,,"$125.00",2025-12-05,Succeeded
+10016,Steven,Harris,Steve H,sharris@email.com,sharris@email.com,,"$100.00",2024-12-10,Succeeded
 10017,Rachel,Martin,Rachel M,rmartin@school.edu,rmartin@school.edu,Sunrise Academy,"$100.00",2025-08-30,Succeeded
 10017,Rachel,Martin,Rachel M,rmartin@school.edu,rmartin@school.edu,Sunrise Academy,"$50.00",2025-11-28,Succeeded
+10017,Rachel,Martin,Rachel M,rmartin@school.edu,rmartin@school.edu,Sunrise Academy,"$75.00",2024-08-25,Succeeded
+10017,Rachel,Martin,Rachel M,rmartin@school.edu,rmartin@school.edu,Sunrise Academy,"$50.00",2023-08-20,Succeeded
 10018,Andrew,Clark,Andrew C,aclark@email.com,aclark@email.com,,"$75.00",2025-09-20,Succeeded
+10018,Andrew,Clark,Andrew C,aclark@email.com,aclark@email.com,,"$50.00",2024-09-15,Succeeded
 10019,Stephanie,Lewis,Steph L,slewis@email.com,slewis@email.com,,"$60.00",2025-10-08,Succeeded
+10019,Stephanie,Lewis,Steph L,slewis@email.com,slewis@email.com,,"$50.00",2024-10-12,Succeeded
 10020,Jason,Walker,Jason W,jwalker@email.com,jwalker@email.com,,"$50.00",2025-11-01,Succeeded
+10020,Jason,Walker,Jason W,jwalker@email.com,jwalker@email.com,,"$50.00",2024-11-05,Succeeded
+10020,Jason,Walker,Jason W,jwalker@email.com,jwalker@email.com,,"$25.00",2023-11-10,Succeeded
 10021,Melissa,Hall,Melissa H,mhall@email.com,mhall@email.com,,"$25.00",2025-12-10,Succeeded
-10022,,,Anonymous Donor,anonymous@private.com,anonymous@private.com,,"$5,000.00",2025-10-01,Succeeded`;
+10021,Melissa,Hall,Melissa H,mhall@email.com,mhall@email.com,,"$25.00",2024-12-15,Succeeded
+10022,,,Anonymous Donor,anonymous@private.com,anonymous@private.com,,"$5,000.00",2025-10-01,Succeeded
+10022,,,Anonymous Donor,anonymous@private.com,anonymous@private.com,,"$5,000.00",2024-10-05,Succeeded
+10022,,,Anonymous Donor,anonymous@private.com,anonymous@private.com,,"$5,000.00",2023-10-08,Succeeded
+10023,Patricia,Moore,Pat Moore,pmoore@email.com,pmoore@email.com,Moore Foundation,"$1,500.00",2024-03-15,Succeeded
+10023,Patricia,Moore,Pat Moore,pmoore@email.com,pmoore@email.com,Moore Foundation,"$1,200.00",2023-03-20,Succeeded
+10024,Gregory,Scott,Greg S,gscott@business.com,gscott@business.com,Scott Enterprises,"$800.00",2024-06-10,Succeeded
+10024,Gregory,Scott,Greg S,gscott@business.com,gscott@business.com,Scott Enterprises,"$600.00",2023-06-15,Succeeded
+10025,Catherine,Young,Cathy Y,cyoung@email.com,cyoung@email.com,,"$500.00",2024-04-22,Succeeded
+10025,Catherine,Young,Cathy Y,cyoung@email.com,cyoung@email.com,,"$400.00",2023-04-18,Succeeded
+10026,William,King,Bill King,wking@company.com,wking@company.com,King Industries,"$350.00",2024-05-08,Succeeded
+10026,William,King,Bill King,wking@company.com,wking@company.com,King Industries,"$300.00",2023-05-12,Succeeded
+10027,Elizabeth,Wright,Liz W,ewright@email.com,ewright@email.com,,"$200.00",2024-02-28,Succeeded
+10027,Elizabeth,Wright,Liz W,ewright@email.com,ewright@email.com,,"$150.00",2023-02-25,Succeeded
+10028,Thomas,Hill,Tom Hill,thill@school.edu,thill@school.edu,Westside Elementary,"$100.00",2024-01-15,Succeeded
+10028,Thomas,Hill,Tom Hill,thill@school.edu,thill@school.edu,Westside Elementary,"$75.00",2023-01-20,Succeeded
+10029,Margaret,Green,Maggie G,mgreen@email.com,mgreen@email.com,,"$50.00",2024-11-30,Succeeded
+10029,Margaret,Green,Maggie G,mgreen@email.com,mgreen@email.com,,"$50.00",2023-11-25,Succeeded
+10030,Richard,Adams,Rick Adams,radams@nonprofit.org,radams@nonprofit.org,Adams Family Trust,"$2,000.00",2023-12-01,Succeeded`;
 
     csvData = sampleCSV;
-    fileName.textContent = 'Loaded: Sample Data (25 donors)';
+    fileName.textContent = 'Loaded: Sample Data (3 years, 30 donors)';
     analyzeBtn.disabled = false;
 
     // Auto-analyze to show results immediately
